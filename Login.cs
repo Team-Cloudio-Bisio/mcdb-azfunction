@@ -3,20 +3,16 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 
-namespace minecraftsaas.DB
-{
-    public class Login
-    {
+namespace minecraftsaas.DB {
+    public class Login {
         private readonly ILogger _logger;
 
-        public Login(ILoggerFactory loggerFactory)
-        {
+        public Login(ILoggerFactory loggerFactory) {
             _logger = loggerFactory.CreateLogger<Login>();
         }
 
         [Function("Login")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
-        {
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req) {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var response = req.CreateResponse(HttpStatusCode.OK);
