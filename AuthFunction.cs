@@ -41,13 +41,14 @@ namespace minecraftsaas.DB {
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            response.WriteString(result + "");
 
-            if(result == 1) {
-                response.WriteString("{\"message\": \"OK\"}");
-            } else {
-                response = req.CreateResponse(HttpStatusCode.NotFound);
-                response.WriteString("{\"message\": \"NO\"}");
-            }
+            // if(result == 1) {
+            //     response.WriteString("{\"message\": \"OK\"}");
+            // } else {
+            //     response = req.CreateResponse(HttpStatusCode.NotFound);
+            //     response.WriteString("{\"message\": \"NO\"}");
+            // }
 
             return response;
         }
