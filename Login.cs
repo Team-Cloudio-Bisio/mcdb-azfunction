@@ -18,7 +18,7 @@ namespace minecraftsaas.DB {
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
-            response.WriteString("Welcome to Azure Functions!");
+            response.WriteString(Environment.GetEnvironmentVariable("TestEnv"));
 
             return response;
         }
