@@ -45,10 +45,10 @@ jobs:
           go-version: '1.15'
 
       - name: Build Go
-        run: go build -v ./Test
+        run: go build -v ./...
       
       - name: Test Go
-        run: go test -v ./Test
+        run: go test -v ./...
 
   deploy:
     name: Deploy DotNet Azure Function
