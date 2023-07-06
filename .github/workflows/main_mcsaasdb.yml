@@ -14,7 +14,8 @@ env:
   DOTNET_VERSION: '7.0.x' # set this to the dotnet version to use
 
 jobs:
-  build-and-deploy:
+  build:
+    name: Build DotNet Azure Function
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
@@ -31,7 +32,29 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
           popd
+  test:
+    name: Test Azure Function
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
+      - name: Setuo Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.15'
+
+      - name: Build Go
+        run: go build -v ./Test
+      
+      - name: Test Go
+        run: go test -v ./Test
+
+  deploy:
+    name: Deploy DotNet Azure Function
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
