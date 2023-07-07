@@ -14,8 +14,7 @@ env:
   DOTNET_VERSION: '7.0.x' # set this to the dotnet version to use
 
 jobs:
-  build:
-    name: Build DotNet Azure Function
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
@@ -33,10 +32,6 @@ jobs:
           dotnet build --configuration Release --output ./output
           popd
 
-  deploy:
-    name: Deploy DotNet Azure Function
-    runs-on: ubuntu-latest
-    steps:
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
